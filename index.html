@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="ann.js"></script>
+    <script type="text/javascript" src="lann-KIMS.js"></script>
+    <script>
+        window.onload = function() {
+            jcApp.startApp();
+        }
+    </script>
+    <title>Copper Alloy Property Predictor</title>
+</head>
+<body>
+    <section class="title">
+        <div class="container">
+            <h1>Machine Learning Model Predicting<br/>Strength and Conductivity of<br/>Copper alloys (KIMS data) ver.0.5b</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <p class="paragraph">
+            Our website provides a <span style="color: var(--main-color); font-weight: bold;">machine learning model</span> to predict Vickers hardness and electrical conductivity of copper alloys.
+            The purpose of this website is to demonstrate the excellence of our machine learning model.
+            Therefore, detailed information on the material synthesis process is omitted.
+            <br/>
+
+            You can also find a machine learning model for predicting thermoelectric properties of BiTe-based materials at <a href="https://jaywan-chung.github.io/ml-tep-BiTe/" target="_blank" style="color: var(--main-color); font-weight: bold;">our website</a>.
+        </p>
+        <p class="paragraph" style="margin-top: 20px;">
+            Please follow the steps below to predict the material properties.
+        </p>
+        <h2 class="subtitle">Step 1: Choose Material Composition and Producing Method</h2>
+        <p class="paragraph">
+            SHT stands for Solution Heat Treatment.
+        </p>
+        <div class="container">
+            <fieldset class="option-group" style="text-align: center;">
+                <legend class="option-group-title">Scatter Plot: Experiments by KIMS (Expt)</legend>
+                <form>
+                    <select name="rawdata", id="select-rawdata", size="6"></select>
+                </form>
+            </fieldset>
+        </div>
+        <div class="container">
+            <fieldset class="option-group">
+                <legend class="option-group-title">Plot 1: Machine Prediction (Pred 1)</legend>
+                <form>
+                    <label class="param-label">Cu:</label>
+                    <label class="param-unit-label">&nbsp; &nbsp; &nbsp; Bal. [wt%]</label>
+
+                    <label class="param-label" for="plot1-Ni-composition">Ni:</label>
+                    <input class="param-input" type="text" id="plot1-Ni-composition">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot1-Si-composition">Si:</label>
+                    <input class="param-input" type="text" id="plot1-Si-composition">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot1-Mg-composition">Mg:</label>
+                    <input class="param-input" type="text" id="plot1-Mg-composition">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot1-Ti-composition">Ti:</label>
+                    <input class="param-input" type="text" id="plot1-Ti-composition">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot1-Cr-composition">Cr:</label>
+                    <input class="param-input" type="text" id="plot1-Cr-composition">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot1-Mn-composition">Mn:</label>
+                    <input class="param-input" type="text" id="plot1-Mn-composition">
+                    <label class="param-unit-label">[wt%]</label>
+
+                </form>
+                <form>
+                    <label class="param-label" for="plot1-quenching">Quenching:</label>
+                    <select name="plot1-quenching" id="plot1-quenching">
+                        <option value="No SHT">No SHT</option>
+                        <option value="Air">Air</option>
+                        <option value="Water">Water</option>
+                    </select>    
+
+                    <label class="param-label" for="plot1-precold-deform">Pre-cold deform:</label>
+                    <select name="plot1-precold-deform" id="plot1-precold-deform">
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </form>
+                <form>
+                    <label class="param-label" for="plot1-aging-temp">Aging Temp:</label>
+                    <input class="param-input" type="text" id="plot1-aging-temp">
+                    <label class="param-unit-label">[°C]</label>
+                </form>
+                <div class="button-container">
+                    <button type="button" id="select-rawdata-button-for-plot1">Select from Expt. Data</button>
+                </div>    
+            </fieldset>
+
+            <fieldset class="option-group">
+                <legend class="option-group-title">Plot 2: Machine Prediction (Pred 2)</legend>
+                <form>
+                    <label class="param-label">Cu:</label>
+                    <label class="param-unit-label">&nbsp; &nbsp; &nbsp; Bal. [wt%]</label>
+
+                    <label class="param-label" for="plot2-Ni-composition">Ni:</label>
+                    <input class="param-input" type="text" id="plot2-Ni-composition" value="2.85">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot2-Si-composition">Si:</label>
+                    <input class="param-input" type="text" id="plot2-Si-composition" value="0.60">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot2-Mg-composition">Mg:</label>
+                    <input class="param-input" type="text" id="plot2-Mg-composition" value="0.09">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot2-Ti-composition">Ti:</label>
+                    <input class="param-input" type="text" id="plot2-Ti-composition" value="0.05">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot2-Cr-composition">Cr:</label>
+                    <input class="param-input" type="text" id="plot2-Cr-composition" value="0.11">
+                    <label class="param-unit-label">[wt%]</label>
+
+                    <label class="param-label" for="plot2-Mn-composition">Mn:</label>
+                    <input class="param-input" type="text" id="plot2-Mn-composition" value="0">
+                    <label class="param-unit-label">[wt%]</label>
+
+                </form>
+                <form>
+                    <label class="param-label" for="plot2-quenching">Quenching:</label>
+                    <select name="plot2-quenching" id="plot2-quenching">
+                        <option value="No SHT">No SHT</option>
+                        <option value="Air" selected="selected">Air</option>
+                        <option value="Water">Water</option>
+                    </select>    
+
+                    <label class="param-label" for="plot2-precold-deform">Pre-cold deform:</label>
+                    <select name="plot2-precold-deform" id="plot2-precold-deform">
+                        <option value="No">No</option>
+                        <option value="Yes" selected="selected">Yes</option>
+                    </select>
+                </form>
+                <form>
+                    <label class="param-label" for="plot2-aging-temp">Aging Temp:</label>
+                    <input class="param-input" type="text" id="plot2-aging-temp" value="425">
+                    <label class="param-unit-label">[°C]</label>
+                </form>
+                <div class="button-container">
+                    <button type="button" id="select-rawdata-button-for-plot2">Select from Expt. Data</button>
+                </div>
+            </fieldset>
+
+            <fieldset class="option-group">
+                <legend class="option-group-title">Show Options</legend>
+                <form>
+                    <fieldset style="padding: 0;">
+                        <label class="param-label" for="show-data">Expt:</label>
+                        <input class="param-input" type="checkbox" id="show-data" name="show-data" checked />
+                    </fieldset>
+                </form>
+                <form>
+                    <fieldset style="padding: 0;">
+                        <label class="param-label" for="show-plot1">Pred 1:</label>
+                        <input class="param-input" type="checkbox" id="show-plot1" name="show-plot1" checked />
+                        <label class="param-label" for="show-plot1-ci">Pred 1 CI:</label>
+                        <input class="param-input" type="checkbox" id="show-plot1-ci" name="show-plot1-ci" checked />
+                    </fieldset>
+                </form>
+                <form>
+                    <fieldset style="padding: 0;">
+                        <label class="param-label" for="show-plot2">Pred 2:</label>
+                        <input class="param-input" type="checkbox" id="show-plot2" name="show-plot2" checked />
+                        <label class="param-label" for="show-plot2-ci">Pred 2 CI:</label>
+                        <input class="param-input" type="checkbox" id="show-plot2-ci" name="show-plot2-ci" checked />
+                    </fieldset>
+                </form>
+            </fieldset>    
+        <div class="button-container">
+            <button type="button" class="selection-button" id="predict-mat-prop">Predict Hardness and Conductivity</button>
+        </div>
+    </section>
+
+    <div class="pagebreak"> </div>
+
+    <section class="section mat-prop-curve">
+        <h2 class="subtitle">Step 2: Check the Material Properties (Our Model)</h2>
+        <p class="paragraph">
+            In the plot, the filled region means <span style="color: var(--main-color); font-weight: bold;">95% CI (confidence interval) of the mean</span>.
+            However, because the synthesis is rarely repeated in this example, the CI has no significant meaning.
+        </p>
+        <h2 class="subtitle-print">Material Properties</h2>
+        <div class="chart-container" id="mat-prop-chart-container">
+            <article class="chart">
+                <div id="chart-hardness"></div>
+            </article>
+            <article class="chart">
+                <div id="chart-conductivity"></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section mat-prop-curve" style="display:none">
+        <h2 class="subtitle">Compare: Prediction by a Standard Neural Network</h2>
+        <p class="paragraph">
+            The following shows a prediction by a fully connected neural network that has a similar size to our model (about 72,000 weights).
+        </p>
+        <h2 class="subtitle-print">Material Properties</h2>
+        <div class="chart-container" id="mat-prop-chart-container">
+            <article class="chart">
+                <div id="chart-fcnn-hardness"></div>
+            </article>
+            <article class="chart">
+                <div id="chart-fcnn-conductivity"></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section methods">
+        <h2 class="subtitle">Methods</h2>
+        <!-- for credits -->
+        <ul class="paragraph">
+            <li>
+                Machine learning model: We use an <strong style="color: var(--main-color);">artificial neural network</strong>. We designed a special architecture for the prediction of physical property curves.
+                The details will be made public in the near future.
+            </li>
+            <li>
+                CI prediction: We use a method that estimates the mean and the variance of the material properties,
+                assuming that electrical resistivity, Seebeck coefficient, and thermal conductivity have an error of normal distribution.
+                For details, refer to <a href="https://ieeexplore.ieee.org/document/374138" target="_blank">Nix and Weigend (1994)</a>.    
+            </li>
+        </ul>
+    </section>
+
+    <section class="section contacts">
+        <h2 class="subtitle">Contacts</h2>
+        <!-- for credits -->
+        <ul class="paragraph">
+            <li>Dr. Jaywan Chung: jchung at keri.re.kr | Ext. 1631</li>
+            <li>Dr. Byungki Ryu: byungkiryu at keri.re.kr</li>
+            <li>Dr. Seung Zeon Han: szhan at kims.re.kr</li>
+        </ul>
+    </section>
+
+    <section class="section acknowledgements">
+        <h2 class="subtitle">Powered by</h2>
+        <!-- for credits -->
+        <ul class="paragraph">
+            <li><a href="https://fonts.google.com/" target="_blank">Google Fonts</a>: <em>Poppins</em> font</li>
+            <li><a href="https://developers.google.com/chart/" target="_blank">Google Charts</a>: Graphs</li>
+        </ul>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <section class="footer-keri-info">
+                <div class="left-col">
+                    <a href="https://www.keri.re.kr/html/en/" target="_blank">
+                        <img src="images/KERI-logo-with-eng.png">
+                    </a>
+                </div>
+                <div class="right-col">
+                    <p>Energy Conversion Research Center, Korea Electrotechnology Research Institute (KERI)</p>
+                    <address>12, Bulmosan-ro 10beon-gil, Seongsan-gu, Changwon-si, Gyeongsangnam-do, 51543 South Korea</address>
+                    <p>Copyright &copy; 2023 KERI. All rights reserved.</p>
+                </div>
+            </section>
+        </div>
+    </footer>
+
+</body>
+</html>
